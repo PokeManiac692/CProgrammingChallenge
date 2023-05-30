@@ -8,7 +8,7 @@
 ## Running This Program and What to Expect
 
 #### TL;DR
-In this program, the user inputs a sentence which is broken down into a **linked-list dictionary**, storing the `word` itself, the character `length`, and the four letter `abbreviation`. Using a variation of the **Bubble-Sort Algorithm**, the dictionary is alphabetically sorted. Users can search for words in the dictionary using a **linear search** function that supports **case sensitive** and **case insensitive** searches. Users can also add new entries or delete the entire linked-list dictionary.
+In this program, the user inputs a sentence which is broken down into a **linked-list dictionary**, storing the `word` itself, the character `length`, and the four letter `abbreviation`. Using a variation of the **Bubble-Sort Algorithm**, the dictionary is alphabetically sorted. Users can search for words in the dictionary using a **linear search** function that supports **case sensitive** and **case insensitive** searches (Time Complexity - `O(n)`). Users can also add new entries or delete the entire linked-list dictionary.
 
 1. Upon hitting `Run`, the user will be directed to the following Start Menu:
 ```
@@ -18,7 +18,7 @@ In this program, the user inputs a sentence which is broken down into a **linked
 ██   ██ ██ ██    ██ ██    ██    ██  ███    ██      
 ██████  ██  ██████  ██    ██    ██ ███████ ███████ 
 
-JA Programming Challenge Submission
+JAbuan Programming Challenge Submission
 ---------------------------------------------------
 1. Start Program
 2. End Program
