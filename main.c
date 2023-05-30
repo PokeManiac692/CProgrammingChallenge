@@ -140,7 +140,7 @@ Node* searchWord(const char* word) {
     return NULL; // Word not found
 }
 
-
+/* userSearch logic - option to add search to dictionary */
 void userSearch() {
   // User search
     char searchedWord[MAX_WORD_LENGTH];
@@ -163,6 +163,21 @@ void userSearch() {
             printf("'%s' has been added to the dictionary.\n", searchedWord);
         }
     }
+}
+
+/* Deletes the entire linked list */
+void deleteDictionary() {
+    Node* current = dictionary;
+    Node* next;
+
+    while (current != NULL) {
+        next = current->next;
+        current->next = NULL;
+        current = next;
+    }
+
+    // Clear the contents of the dictionary array
+    memset(dictionary, 0, sizeof(Node) * 100);
 }
 
 /* Prints the linked list dictionary */
@@ -194,6 +209,10 @@ int main(void) {
   userSearch();
   // Print updated dictionary
   printf("\nUpdated Dictionary:\n");
+  printDictionary(dictionary);
+
+  deleteDictionary();
+  printf("\nDictionary After Delete:\n");
   printDictionary(dictionary);
 
   

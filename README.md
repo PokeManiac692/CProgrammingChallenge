@@ -14,7 +14,7 @@
 | 5/26 | 12:00 PM | 1:30 PM | Created linked list dictionary<br>Dictionary Structure:<br>`word`->`word length`->`first 4 letters` |
 | Date | 8:00 AM | 8:30 AM | Created `alphabetizeDictionary()` |
 | Date | 9:50 AM | 10:20 AM | Fixed errors according to specifications<br>Created `userSearch()` |
-| Date | StartT | EndT | Task |
+| Date | 10:20 AM | 10:35 AM | Created `deleteDictionary()` |
 | Date | StartT | EndT | Task |
 
 ### Project Notes
