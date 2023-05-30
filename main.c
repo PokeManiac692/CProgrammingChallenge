@@ -15,7 +15,7 @@ typedef struct Node {
 Node dictionary[MAX_WORDS];  // Global memory for dictionary
 int dictionarySize = 0;  // Current size of the dictionary
 
-/* function to get a user input sentence */
+/* Gets a user input sentence */
 char* sentenceUserInput() {
 
    // get, store, and print user input sentence
@@ -28,7 +28,7 @@ char* sentenceUserInput() {
   return sentenceInput;
 }
 
-/* Function to add a word to the dictionary */
+/* Adds a word to the dictionary */
 void addToDictionary(char* word) {
     if (dictionarySize >= MAX_WORDS) {
         printf("Dictionary is full. Cannot add more words.\n");
@@ -59,7 +59,7 @@ void addToDictionary(char* word) {
     dictionarySize++; // Increase the size of the dictionary
 }
 
-/* Function to create and return a linked list dictionary */
+/* Creates and returns a linked list dictionary */
 Node* createDictionary(char* sentence) {
     int sentenceLength = strlen(sentence);
     int wordStart = 0;
@@ -82,7 +82,7 @@ Node* createDictionary(char* sentence) {
     return &dictionary[0]; // Return the head of the linked list dictionary
 }
 
-/* Function to alphabetize a linked list */
+/* Alphabetizes a linked list */
 void alphabetizeDictionary() {
     if (dictionary == NULL || dictionary->next == NULL) {
         return; // No need to sort an empty or single-node list
@@ -100,9 +100,24 @@ void alphabetizeDictionary() {
             if (strcmp(current->word, current->next->word) > 0) {
                 // Swap nodes
                 char temp[MAX_WORD_LENGTH];
+                int tempLength;
+                char tempFour[5];
+
+                // word swap
                 strcpy(temp, current->word);
-                strcpy(current->word, current->next->word);
+                strcpy(current->word, current->next->word);       
                 strcpy(current->next->word, temp);
+
+                // length swap
+                tempLength = current->length;
+                current->length = current->next->length;
+                current->next->length = tempLength;
+
+                //firstFour swap
+                strcpy(tempFour, current->firstFour);
+                strcpy(current->firstFour, current->next->firstFour);
+                strcpy(current->next->firstFour, tempFour);
+              
                 swapped = 1;
             }
             current = current->next;
@@ -111,7 +126,46 @@ void alphabetizeDictionary() {
     } while (swapped);
 }
 
-/* Function to print the linked list dictionary */
+/* Searches for and returns a word from dictionary or NULL */
+Node* searchWord(const char* word) {
+    Node* current = dictionary;
+
+    while (current != NULL) {
+        if (strcmp(current->word, word) == 0) {
+            return current; // Word found
+        }
+        current = current->next;
+    }
+
+    return NULL; // Word not found
+}
+
+
+void userSearch() {
+  // User search
+    char searchedWord[MAX_WORD_LENGTH];
+    printf("\nEnter a word to search: ");
+    scanf("%s", searchedWord);
+
+    Node* foundNode = searchWord(searchedWord);
+    if (foundNode != NULL) {
+        printf("Word found: %s\n", foundNode->firstFour);
+    } else {
+        printf("Word not found.\n");
+
+        char choice;
+        printf("Do you want to add '%s' to the dictionary? (y/n): ", searchedWord);
+        scanf(" %c", &choice);
+
+        if (choice == 'y' || choice == 'Y') {
+            addToDictionary(searchedWord);
+            alphabetizeDictionary();
+            printf("'%s' has been added to the dictionary.\n", searchedWord);
+        }
+    }
+}
+
+/* Prints the linked list dictionary */
 void printDictionary(Node* head) {
     Node* current = head;
 
@@ -136,6 +190,13 @@ int main(void) {
   // Print alphabetized dictionary
   printf("\nAlphabetized Dictionary:\n");
   printDictionary(dictionary);
+
+  userSearch();
+  // Print updated dictionary
+  printf("\nUpdated Dictionary:\n");
+  printDictionary(dictionary);
+
+  
   
   return 0;
 }

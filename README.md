@@ -13,6 +13,7 @@
 | 5/25 | 4:30 PM | 5:00 PM | Review Program Specifications<br>Create sentence input function |
 | 5/26 | 12:00 PM | 1:30 PM | Created linked list dictionary<br>Dictionary Structure:<br>`word`->`word length`->`first 4 letters` |
 | Date | 8:00 AM | 8:30 AM | Created `alphabetizeDictionary()` |
+| Date | 9:50 AM | 10:20 AM | Fixed errors according to specifications<br>Created `userSearch()` |
 | Date | StartT | EndT | Task |
 | Date | StartT | EndT | Task |
 
