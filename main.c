@@ -82,6 +82,35 @@ Node* createDictionary(char* sentence) {
     return &dictionary[0]; // Return the head of the linked list dictionary
 }
 
+/* Function to alphabetize a linked list */
+void alphabetizeDictionary() {
+    if (dictionary == NULL || dictionary->next == NULL) {
+        return; // No need to sort an empty or single-node list
+    }
+
+    int swapped;
+    Node* current;
+    Node* last = NULL;
+
+    do {
+        swapped = 0;
+        current = dictionary;
+
+        while (current->next != last) {
+            if (strcmp(current->word, current->next->word) > 0) {
+                // Swap nodes
+                char temp[MAX_WORD_LENGTH];
+                strcpy(temp, current->word);
+                strcpy(current->word, current->next->word);
+                strcpy(current->next->word, temp);
+                swapped = 1;
+            }
+            current = current->next;
+        }
+        last = current;
+    } while (swapped);
+}
+
 /* Function to print the linked list dictionary */
 void printDictionary(Node* head) {
     Node* current = head;
@@ -99,6 +128,13 @@ int main(void) {
   Node* dictionary = createDictionary(sentence);
 
   printf("Linked List Dictionary:\n");
+  printDictionary(dictionary);
+
+  // Alphabetize the dictionary
+  alphabetizeDictionary();
+
+  // Print alphabetized dictionary
+  printf("\nAlphabetized Dictionary:\n");
   printDictionary(dictionary);
   
   return 0;

@@ -7,13 +7,14 @@
 * **output to console**
 
 ### Programming Log
-| Start Time | Stop Time | Task Description |
-| ----------- | ----------- | ----------- |
-| 2:20 PM | 2:25 PM | Started Repl<br>Connected to Github<br>Started README.md |
-| 4:30 PM | 5:00 PM | Review Program Specifications<br>Create sentence input function |
-| StartT | EndT | Task |
-| StartT | EndT | Task |
-| StartT | EndT | Task |
+| Date | Start Time | Stop Time | Task Description |
+| ----------- | ----------- | ----------- | ----------- |
+| 5/25 | 2:20 PM | 2:25 PM | Started Repl<br>Connected to Github<br>Started README.md |
+| 5/25 | 4:30 PM | 5:00 PM | Review Program Specifications<br>Create sentence input function |
+| 5/26 | 12:00 PM | 1:30 PM | Created linked list dictionary<br>Dictionary Structure:<br>`word`->`word length`->`first 4 letters` |
+| Date | 8:00 AM | 8:30 AM | Created `alphabetizeDictionary()` |
+| Date | StartT | EndT | Task |
+| Date | StartT | EndT | Task |
 
 ### Project Notes
 * What was easy?
