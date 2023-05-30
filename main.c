@@ -1,3 +1,8 @@
+/*
+  Jeremy Abuan ©️ 2023
+  Digitize Programming Challenge
+*/
+
 #include <stdio.h>
 #include <string.h>
 
@@ -5,6 +10,7 @@
 #define MAX_WORD_LENGTH 50
 
 /* Structure for dictionary entry */
+/* word -> length -> abbreviation */
 typedef struct Node {
     char word[MAX_WORD_LENGTH];
     int length;
@@ -27,7 +33,7 @@ char* sentenceUserInput() {
   return sentenceInput;
 }
 
-/* Adds a word to the dictionary */
+/* Adds a word to the linked-list dictionary */
 void addToDictionary(char* word) {
     if (dictionarySize >= MAX_WORDS) {
         printf("Dictionary is full. Cannot add more words.\n");
@@ -78,6 +84,7 @@ Node* createDictionary(char* sentence) {
     int wordStart = 0;
     int i;
 
+    // Iterate through sentence to extract each word
     for (i = 0; i <= sentenceLength; i++) {
         if (sentence[i] == ' ' || sentence[i] == '\0') {
             // Found a word boundary, extract the word
@@ -99,14 +106,14 @@ Node* createDictionary(char* sentence) {
         // if new line, zero character and update length
         if (lastNode->word[lastNodeLength - 1] == '\n') {
             lastNode->word[lastNodeLength - 1] = '\0';
-            lastNode->length = lastNodeLength - 1;
+            lastNode->length = lastNodeLength - 1;  // update the character length
         }
     }
   
     return &dictionary[0]; // Return the head of the linked list dictionary
 }
 
-/* Alphabetizes a linked list */
+/* Alphabetizes a linked list using Bubble Sort Algorithm */
 void alphabetizeDictionary() {
     if (dictionary == NULL || dictionary->next == NULL) {
         return; // No need to sort an empty or single-node list
@@ -151,6 +158,7 @@ void alphabetizeDictionary() {
 }
 
 /* Searches for and returns a word from dictionary or NULL */
+/* Case Sensitive Linear Search O(n)*/
 Node* searchWord(const char* word) {
     Node* current = dictionary;
 
@@ -165,6 +173,7 @@ Node* searchWord(const char* word) {
 }
 
 /* Searches for and returns a word from dictionary or NULL */
+/* Case Insensitive search */
 Node* cInsensitiveSearchWord(const char* word) {
     Node* current = dictionary;
 
@@ -198,6 +207,7 @@ void userSearch() {
   
   if (foundNode != NULL) {
     printf("Word found: %s\n", foundNode->firstFour);
+    printf("Word: %s,\t\tLength: %d,\t\tAbbreviation: %s\n", foundNode->word, foundNode->length, foundNode->firstFour);
   } else {
     printf("Word not found.\n");
 
@@ -213,7 +223,7 @@ void userSearch() {
   }
 }
 
-/*  */
+/* Adds a new entry to the existing dictionary */
 void addNewDictEntry(char* newEntry) {
   addToDictionary(newEntry);
   alphabetizeDictionary();
@@ -228,6 +238,7 @@ void deleteDictionary() {
     while (current != NULL) {
         next = current->next;
         current->next = NULL;
+        current->word[0] = '\0';  // Reset the word to an empty string
         current = next;
     }
 
@@ -240,43 +251,167 @@ void printDictionary(Node* head) {
     Node* current = head;
 
     while (current != NULL) {
-        printf("Word: %s, Word length: %d, First four letters: %s\n", current->word, current->length, current->firstFour);
+        printf("Word: %s,\t\tLength: %d,\t\tAbbreviation: %s\n", current->word, current->length, current->firstFour);
         current = current->next;
     }
 }
 
-int main(void) {
-  
-  char* sentence = sentenceUserInput();
-
-  Node* dictionary = createDictionary(sentence);
-
-  printf("Linked List Dictionary:\n");
-  printDictionary(dictionary);
-
-  // Alphabetize the dictionary
-  alphabetizeDictionary();
-
-  // Print alphabetized dictionary
-  printf("\nAlphabetized Dictionary:\n");
-  printDictionary(dictionary);
-
-  
-  userSearch();
-  // Print updated dictionary
-  printf("\nUpdated Dictionary:\n");
-  printDictionary(dictionary);
-
-  // deleteDictionary();
-  // printf("\nDictionary After Delete:\n");
-  // printDictionary(dictionary);
-
+/* Add a new entry to dictionary */
+void addAnEntry() {
   char addNewWord[MAX_WORD_LENGTH];
   printf("\nEnter a new word to add: ");
   scanf("%s", addNewWord);
   addNewDictEntry(addNewWord);
-  printf("\nDictionary After new addition:\n");
-  printDictionary(dictionary);
+}
+
+/*----- UI for Menu Start -----*/
+void displayMenu() {
+  printf("\n██████  ██  ██████  ██ ████████ ██ ███████ ███████ \n"); 
+  printf("██   ██ ██ ██       ██    ██    ██    ███  ██      \n"); 
+  printf("██   ██ ██ ██   ███ ██    ██    ██   ███   █████   \n"); 
+  printf("██   ██ ██ ██    ██ ██    ██    ██  ███    ██      \n"); 
+  printf("██████  ██  ██████  ██    ██    ██ ███████ ███████ \n"); 
+  printf("\nJA Programming Challenge Submission\n");
+  printf("---------------------------------------------------\n");
+  printf("1. Start Program\n");
+  printf("2. End Program\n");
+  printf("Enter numerical choice: ");
+}
+
+void displayProgramMenu() {
+  printf("   ____        _   _                  \n");
+  printf("  / __ \\      | | (_)                 \n");
+  printf(" | |  | |_ __ | |_ _  ___  _ __  ___  \n");
+  printf(" | |  | | '_ \\| __| |/ _ \\| '_ \\/ __| \n");
+  printf(" | |__| | |_) | |_| | (_) | | | \\__ \\ \n");
+  printf("  \\____/| .__/ \\__|_|\\___/|_| |_|___/ \n");
+  printf("        | |                           \n");
+  printf("        |_|                           \n");
+  printf("\n---------------------------------------------------\n");
+  printf("1. Print Alphabetized List\n");
+  printf("2. Look Up a Word\n");
+  printf("3. Add an Entry\n");
+  printf("4. Initialize the Current Linked List\n");
+  printf("5. Exit Program\n\n");
+  printf("Enter numerical choice: ");
+}
+
+void programMenu() {
+  int userChoice;
+
+  do {
+    displayProgramMenu();
+    scanf("%d", &userChoice);
+
+    switch (userChoice) {
+      case 1:
+        /* Print Alphabetized Dictionary */
+        system("clear");
+        printf("\nAlphabetized Dictionary:\n");
+        printf("---------------------------------------------------\n");
+        printDictionary(dictionary);
+        printf("---------------------------------------------------\n\n\n\n");
+        // Flush the newline character from the input buffer
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        printf("Press ENTER key to Continue\n");  
+        getchar();
+        system("clear"); 
+        break;
+      case 2:
+        /* Look Up a Word */
+        system("clear");
+        userSearch();
+        /* Test for updated dictionary */
+        // // Print updated dictionary
+        // printf("\nUpdated Dictionary:\n");
+        // printf("---------------------------\n");
+        // printDictionary(dictionary);
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        printf("\n\nPress ENTER key to Continue\n");  
+        getchar();
+        system("clear"); 
+        break;
+      case 3:
+        /* Add an Entry */
+        system("clear");
+        addAnEntry();
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        printf("\n\nPress ENTER key to Continue\n");  
+        getchar();
+        system("clear"); 
+        break;
+      case 4:
+        /* Initialize the Current Linked List [DELETE] */
+        system("clear");
+        deleteDictionary();
+        printf("Dictionary Deleted.\n");
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        printf("\n\nPress ENTER key to Continue\n");  
+        getchar();
+        system("clear"); 
+        break;
+      case 5:
+        /* End Program */
+        system("clear");
+        printf("Exiting to main menu...\n\n\n");
+        while ((c = getchar()) != '\n' && c != EOF) {}
+        printf("\n\nPress ENTER key to Continue\n");  
+        getchar();
+        system("clear"); 
+        break;
+      default:
+        /* Catch Input Errors */
+        system("clear"); 
+        printf("Invalid choice. Please try again.\n");
+    }
+  } while (userChoice != 5);  // Exit Program
+}
+
+/* Start Option from Main Menu */
+void startProgram() {
+  system("clear"); 
+  
+  // Flush the newline character from the input buffer
+  int c;
+  while ((c = getchar()) != '\n' && c != EOF) {}
+  
+  char* sentence = sentenceUserInput();
+  
+  Node* dictionary = createDictionary(sentence);
+  
+  // Alphabetize the dictionary
+  alphabetizeDictionary();
+
+  // Prompt user through menu
+  programMenu();
+  
+}
+
+void menu() {
+  int userChoice;
+
+  do {
+    displayMenu();
+    scanf("%d", &userChoice);
+
+    switch (userChoice) {
+      case 1:
+        startProgram();
+        break;
+      case 2:
+        deleteDictionary();
+        break;
+      default:
+        system("clear"); 
+        printf("Invalid choice. Please try again.\n");
+    }
+  } while (userChoice != 2);
+  system("clear");
+}
+
+int main(void) {
+  menu();
   
   return 0;
 }
