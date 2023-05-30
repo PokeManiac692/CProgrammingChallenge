@@ -158,7 +158,7 @@ void alphabetizeDictionary() {
 }
 
 /* Searches for and returns a word from dictionary or NULL */
-/* Case Sensitive Linear Search O(n)*/
+/* Case Sensitive Search*/
 Node* searchWord(const char* word) {
     Node* current = dictionary;
 
@@ -173,7 +173,7 @@ Node* searchWord(const char* word) {
 }
 
 /* Searches for and returns a word from dictionary or NULL */
-/* Case Insensitive search */
+/* Case Insensitive Search */
 Node* cInsensitiveSearchWord(const char* word) {
     Node* current = dictionary;
 
@@ -264,7 +264,10 @@ void addAnEntry() {
   addNewDictEntry(addNewWord);
 }
 
-/*----- UI for Menu Start -----*/
+/* ----- UI for Menu Start ----- */
+/* ----------------------------- */
+
+/* main menu output w/ASCII Art */
 void displayMenu() {
   printf("\n██████  ██  ██████  ██ ████████ ██ ███████ ███████ \n"); 
   printf("██   ██ ██ ██       ██    ██    ██    ███  ██      \n"); 
@@ -278,6 +281,7 @@ void displayMenu() {
   printf("Enter numerical choice: ");
 }
 
+/* program inner-menu w/ASCII Art */
 void displayProgramMenu() {
   printf("   ____        _   _                  \n");
   printf("  / __ \\      | | (_)                 \n");
@@ -296,13 +300,16 @@ void displayProgramMenu() {
   printf("Enter numerical choice: ");
 }
 
+/* program inner-menu logic */
 void programMenu() {
   int userChoice;
 
+  // do {show menu} until user quits
   do {
     displayProgramMenu();
     scanf("%d", &userChoice);
 
+    // menu logic for program functions
     switch (userChoice) {
       case 1:
         /* Print Alphabetized Dictionary */
@@ -322,11 +329,7 @@ void programMenu() {
         /* Look Up a Word */
         system("clear");
         userSearch();
-        /* Test for updated dictionary */
-        // // Print updated dictionary
-        // printf("\nUpdated Dictionary:\n");
-        // printf("---------------------------\n");
-        // printDictionary(dictionary);
+        // Flush the newline character from the input buffer
         while ((c = getchar()) != '\n' && c != EOF) {}
         printf("\n\nPress ENTER key to Continue\n");  
         getchar();
@@ -336,6 +339,7 @@ void programMenu() {
         /* Add an Entry */
         system("clear");
         addAnEntry();
+        // Flush the newline character from the input buffer
         while ((c = getchar()) != '\n' && c != EOF) {}
         printf("\n\nPress ENTER key to Continue\n");  
         getchar();
@@ -346,6 +350,7 @@ void programMenu() {
         system("clear");
         deleteDictionary();
         printf("Dictionary Deleted.\n");
+        // Flush the newline character from the input buffer
         while ((c = getchar()) != '\n' && c != EOF) {}
         printf("\n\nPress ENTER key to Continue\n");  
         getchar();
@@ -355,6 +360,7 @@ void programMenu() {
         /* End Program */
         system("clear");
         printf("Exiting to main menu...\n\n\n");
+        // Flush the newline character from the input buffer
         while ((c = getchar()) != '\n' && c != EOF) {}
         printf("\n\nPress ENTER key to Continue\n");  
         getchar();
@@ -368,9 +374,9 @@ void programMenu() {
   } while (userChoice != 5);  // Exit Program
 }
 
-/* Start Option from Main Menu */
+/* start option from Main Menu */
 void startProgram() {
-  system("clear"); 
+  system("clear"); // Clears console screen for readability
   
   // Flush the newline character from the input buffer
   int c;
@@ -380,17 +386,17 @@ void startProgram() {
   
   Node* dictionary = createDictionary(sentence);
   
-  // Alphabetize the dictionary
-  alphabetizeDictionary();
+  alphabetizeDictionary();  // Alphabetize the dictionary
 
-  // Prompt user through menu
-  programMenu();
+  programMenu();  // Prompt user through menu
   
 }
 
+/* main menu logic */
 void menu() {
   int userChoice;
 
+  // do {show main menu} until user exits
   do {
     displayMenu();
     scanf("%d", &userChoice);
@@ -400,7 +406,6 @@ void menu() {
         startProgram();
         break;
       case 2:
-        deleteDictionary();
         break;
       default:
         system("clear"); 
@@ -411,7 +416,7 @@ void menu() {
 }
 
 int main(void) {
-  menu();
+  menu(); // Show the main menu
   
   return 0;
 }
