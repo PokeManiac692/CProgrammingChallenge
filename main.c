@@ -23,7 +23,6 @@ char* sentenceUserInput() {
 
   printf("Type in a sentence: \n");
   fgets(sentenceInput, sizeof(sentenceInput), stdin);
-  // printf("%s", sentenceInput);
 
   return sentenceInput;
 }
@@ -59,6 +58,20 @@ void addToDictionary(char* word) {
     dictionarySize++; // Increase the size of the dictionary
 }
 
+/* Gets the last node from the linked list dictionary */
+Node* getLastNode() {
+    if (dictionary == NULL) {
+        return NULL;  // The dictionary is empty
+    }
+
+    Node* current = dictionary;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    return current;
+}
+
 /* Creates and returns a linked list dictionary */
 Node* createDictionary(char* sentence) {
     int sentenceLength = strlen(sentence);
@@ -76,6 +89,17 @@ Node* createDictionary(char* sentence) {
             addToDictionary(word); // Add the word to the dictionary
 
             wordStart = i + 1; // Update the word start index
+        }
+    }
+
+    // Remove the newline character from the last word, if present
+    Node* lastNode = getLastNode();
+    if (lastNode != NULL) {
+        int lastNodeLength = strlen(lastNode->word);
+        // if new line, zero character and update length
+        if (lastNode->word[lastNodeLength - 1] == '\n') {
+            lastNode->word[lastNodeLength - 1] = '\0';
+            lastNode->length = lastNodeLength - 1;
         }
     }
   
@@ -140,32 +164,63 @@ Node* searchWord(const char* word) {
     return NULL; // Word not found
 }
 
+/* Searches for and returns a word from dictionary or NULL */
+Node* cInsensitiveSearchWord(const char* word) {
+    Node* current = dictionary;
+
+    while (current != NULL) {
+        if (strcasecmp(current->word, word) == 0) {
+            return current; // Word found
+        }
+        current = current->next;
+    }
+
+    return NULL; // Word not found
+}
+
 /* userSearch logic - option to add search to dictionary */
 void userSearch() {
   // User search
-    char searchedWord[MAX_WORD_LENGTH];
-    printf("\nEnter a word to search: ");
-    scanf("%s", searchedWord);
+  char searchedWord[MAX_WORD_LENGTH];
+  Node* foundNode;
+  printf("\nEnter a word to search: ");
+  scanf("%s", searchedWord);
 
-    Node* foundNode = searchWord(searchedWord);
-    if (foundNode != NULL) {
-        printf("Word found: %s\n", foundNode->firstFour);
-    } else {
-        printf("Word not found.\n");
+  char insensitivity;
+  printf("Do you want to search with case sensitivity? (y/n): ");
+  scanf(" %c", &insensitivity);
 
-        char choice;
-        printf("Do you want to add '%s' to the dictionary? (y/n): ", searchedWord);
-        scanf(" %c", &choice);
+  if (insensitivity == 'y' || insensitivity == 'Y') {
+    foundNode = searchWord(searchedWord);
+  } else {
+    foundNode = cInsensitiveSearchWord(searchedWord);
+  }
+  
+  if (foundNode != NULL) {
+    printf("Word found: %s\n", foundNode->firstFour);
+  } else {
+    printf("Word not found.\n");
 
-        if (choice == 'y' || choice == 'Y') {
-            addToDictionary(searchedWord);
-            alphabetizeDictionary();
-            printf("'%s' has been added to the dictionary.\n", searchedWord);
-        }
+    char choice;
+    printf("Do you want to add '%s' to the dictionary? (y/n): ", searchedWord);
+    scanf(" %c", &choice);
+
+    if (choice == 'y' || choice == 'Y') {
+      addToDictionary(searchedWord);
+      alphabetizeDictionary();
+      printf("'%s' has been added to the dictionary.\n", searchedWord);
     }
+  }
 }
 
-/* Deletes the entire linked list */
+/*  */
+void addNewDictEntry(char* newEntry) {
+  addToDictionary(newEntry);
+  alphabetizeDictionary();
+  printf("'%s' has been added to the dictionary.\n", newEntry);
+}
+
+/* Deletes the contents in the linked list dictionary*/
 void deleteDictionary() {
     Node* current = dictionary;
     Node* next;
@@ -206,16 +261,22 @@ int main(void) {
   printf("\nAlphabetized Dictionary:\n");
   printDictionary(dictionary);
 
+  
   userSearch();
   // Print updated dictionary
   printf("\nUpdated Dictionary:\n");
   printDictionary(dictionary);
 
-  deleteDictionary();
-  printf("\nDictionary After Delete:\n");
-  printDictionary(dictionary);
+  // deleteDictionary();
+  // printf("\nDictionary After Delete:\n");
+  // printDictionary(dictionary);
 
-  
+  char addNewWord[MAX_WORD_LENGTH];
+  printf("\nEnter a new word to add: ");
+  scanf("%s", addNewWord);
+  addNewDictEntry(addNewWord);
+  printf("\nDictionary After new addition:\n");
+  printDictionary(dictionary);
   
   return 0;
 }

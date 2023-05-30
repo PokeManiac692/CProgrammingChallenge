@@ -15,7 +15,8 @@
 | Date | 8:00 AM | 8:30 AM | Created `alphabetizeDictionary()` |
 | Date | 9:50 AM | 10:20 AM | Fixed errors according to specifications<br>Created `userSearch()` |
 | Date | 10:20 AM | 10:35 AM | Created `deleteDictionary()` |
-| Date | StartT | EndT | Task |
+| Date | 10:35 AM | 11:00 AM | Optimized code<br>Created `addNewDict()` |
+| Date | 11:00 AM | 11:15 AM | Added case sensitive search option |
 
 ### Project Notes
 * What was easy?
