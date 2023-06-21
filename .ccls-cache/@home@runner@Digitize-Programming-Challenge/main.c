@@ -269,11 +269,11 @@ void addAnEntry() {
 
 /* main menu output w/ASCII Art */
 void displayMenu() {
-  printf("\n ██████ ██      ██     ████████  ██████   ██████  ██      \n"); 
-  printf("██      ██      ██        ██    ██    ██ ██    ██ ██      \n"); 
-  printf("██      ██      ██        ██    ██    ██ ██    ██ ██      \n"); 
-  printf("██      ██      ██        ██    ██    ██ ██    ██ ██      \n"); 
-  printf(" ██████ ███████ ██        ██     ██████   ██████  ███████ \n"); 
+  printf("\n██████  ██  ██████  ██ ████████ ██ ███████ ███████ \n"); 
+  printf("██   ██ ██ ██       ██    ██    ██    ███  ██      \n"); 
+  printf("██   ██ ██ ██   ███ ██    ██    ██   ███   █████   \n"); 
+  printf("██   ██ ██ ██    ██ ██    ██    ██  ███    ██      \n"); 
+  printf("██████  ██  ██████  ██    ██    ██ ███████ ███████ \n"); 
   printf("\nJA Programming Challenge Submission\n");
   printf("---------------------------------------------------\n");
   printf("1. Start Program\n");

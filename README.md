@@ -1,5 +1,5 @@
-# Digitize Programming Challenge:
-*A simple program in `C` demonstrating the following concepts:*
+# Programming Challenge:
+*A simple CLI program in `C` demonstrating the following concepts:*
 
 * **user input**,
 * **static data structure creation and usage**,
@@ -12,14 +12,14 @@ In this program, the user inputs a sentence which is broken down into a **linked
 
 1. Upon hitting `Run`, the user will be directed to the following Start Menu:
 ```
-██████  ██  ██████  ██ ████████ ██ ███████ ███████ 
-██   ██ ██ ██       ██    ██    ██    ███  ██      
-██   ██ ██ ██   ███ ██    ██    ██   ███   █████   
-██   ██ ██ ██    ██ ██    ██    ██  ███    ██      
-██████  ██  ██████  ██    ██    ██ ███████ ███████ 
+ ██████ ██      ██     ████████  ██████   ██████  ██      
+██      ██      ██        ██    ██    ██ ██    ██ ██      
+██      ██      ██        ██    ██    ██ ██    ██ ██      
+██      ██      ██        ██    ██    ██ ██    ██ ██      
+ ██████ ███████ ██        ██     ██████   ██████  ███████ 
 
 JAbuan Programming Challenge Submission
----------------------------------------------------
+---------------------------------------------------------
 1. Start Program
 2. End Program
 Enter numerical choice: 
@@ -61,7 +61,6 @@ Alphabetized Dictionary:
 Word: Hello,        Length: 5,      Abbreviation: Hell
 Word: challenge,        Length: 9,      Abbreviation: chal
 Word: created,      Length: 7,      Abbreviation: crea
-Word: digitize,     Length: 8,      Abbreviation: digi
 Word: for,      Length: 3,      Abbreviation: for
 Word: programmers,      Length: 11,     Abbreviation: prog
 Word: the,      Length: 3,      Abbreviation: the
@@ -121,7 +120,6 @@ Alphabetized Dictionary:
 Word: Hello,        Length: 5,      Abbreviation: Hell
 Word: challenge,        Length: 9,      Abbreviation: chal
 Word: created,      Length: 7,      Abbreviation: crea
-Word: digitize,     Length: 8,      Abbreviation: digi
 Word: for,      Length: 3,      Abbreviation: for
 Word: programmers,      Length: 11,     Abbreviation: prog
 Word: the,      Length: 3,      Abbreviation: the
@@ -148,7 +146,6 @@ Alphabetized Dictionary:
 Word: Hello,        Length: 5,      Abbreviation: Hell
 Word: challenge,        Length: 9,      Abbreviation: chal
 Word: created,      Length: 7,      Abbreviation: crea
-Word: digitize,     Length: 8,      Abbreviation: digi
 Word: embedded,     Length: 8,      Abbreviation: embe
 Word: for,      Length: 3,      Abbreviation: for
 Word: programmers,      Length: 11,     Abbreviation: prog
